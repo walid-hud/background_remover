@@ -1,27 +1,55 @@
 import {AiOutlineUpload} from 'react-icons/ai'
 import { useState } from "react"
 const MainCard = () => {
-  const [btnState, setBtnState] = useState('remove background')
+  const [btnState, setBtnState] = useState('upload an image')
+  const [IMGfile  , setIMGFile] = useState('')
+  const handleImgUpload = (file)=>{
+    console.log(file)
 
-  const removeBG = async () => {
-    const editedImg = await fetch(removeBG)
+  }
 
+  const getImage = async (file)=>{
+
+
+  }
+  const handleBtnClick = (text) =>{
+    if(text === 'upload image'){
+      
+      
+    }
   }
   return (
     <>
-      <section >
-        <div className="card-container">
-          <div className="img-container">
-            <div className="input-wrapper">
-              <AiOutlineUpload className='icon'/>
-              <input type='file' className="img-input" size={2} multiple={false} />
-            </div>
-          </div>
-          <button onClick={() => setBtnState('Download')} className="submit-button">
-            {btnState}
-          </button>
+      <main className='
+      w-full h-screen flex flex-col items-center
+      justify-center
+      '>
+        <div className='
+        w-[300px] h-[fit] min-h-[300px] -mt-[10%] flex flex-col items-center
+        justify-center outline-dashed outline-white
+        outline-2 rounded-xl overflow-hidden
+         hover:bg-[#000]
+        '>
+          { IMGfile ? '' : <AiOutlineUpload className=' text-white  scale-[6]' /> }
+          <input type="file" id='input' multiple={false} accept='image/jpeg , image/png' 
+          className='
+          z-1 absolute opacity-0 w-[400px] h-[300px]
+          '
+          onChange={(e)=>handleImgUpload(e.target.files[0])}
+          />
         </div>
-      </section>
+
+        <button className='
+        bg-white text-black font-sans text-lg font-medium
+        mt-10 px-4 py-2 rounded-xl hover:bg-transparent hover:text-white
+         hover:border hover:border-white hover:border-solid  
+        '
+        onClick={(e)=>{handleBtnClick(e.target.innerText)}}
+        >
+          
+          upload image
+        </button>
+      </main>
     </>
   )
 }
