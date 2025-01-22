@@ -4,17 +4,26 @@ const MainCard = () => {
   const [btnState, setBtnState] = useState('upload an image')
   const [IMGfile  , setIMGFile] = useState('')
   const handleImgUpload = (file)=>{
-    console.log(file)
+      if(file && file.type.startsWith('image/')){
+        const file_reader = new FileReader()
+        file_reader.onload = (e)=>{
+          setIMGFile(e.target.result)
+        }
+        file_reader.readAsDataURL(file)
+        setBtnState('remove background')
+      }
+    
 
-  }
+    }
 
-  const getImage = async (file)=>{
+
+  const getImage = async (UploadedImg)=>{
 
 
   }
   const handleBtnClick = (text) =>{
-    if(text === 'upload image'){
-      
+    if(text === 'upload an image'){
+      document.querySelector("#input").click()
       
     }
   }
@@ -23,18 +32,25 @@ const MainCard = () => {
       <main className='
       w-full h-screen flex flex-col items-center
       justify-center
+      box-border
       '>
         <div className='
-        w-[300px] h-[fit] min-h-[300px] -mt-[10%] flex flex-col items-center
+        w-fit min-h-[250px] min-w-[300px] max-w-[500px] max-h-[300px]  -mt-[10%] flex flex-col items-center
         justify-center outline-dashed outline-white
-        outline-2 rounded-xl overflow-hidden
+        outline-2 rounded-xl overflow-clip
          hover:bg-[#000]
-        '>
-          { IMGfile ? '' : <AiOutlineUpload className=' text-white  scale-[6]' /> }
-          <input type="file" id='input' multiple={false} accept='image/jpeg , image/png' 
+        '
+        
+        >
+          { IMGfile ? '' : <AiOutlineUpload className=' text-white z-1  scale-[5]' /> }
+          { IMGfile ? <img src={IMGfile}  className='w-full h-full'></img> : " " }
+
+          <input type="file" id='input' title={IMGfile ? "click again to choose a different img " : 'click to upload an img'} multiple={false} accept='image/jpeg , image/png , image/jpg' 
           className='
-          z-1 absolute opacity-0 w-[400px] h-[300px]
+          z-2 absolute opacity-0 
+          min-h-[150px] min-w-[300px] max-w-[500px] max-h-[300px]
           '
+          
           onChange={(e)=>handleImgUpload(e.target.files[0])}
           />
         </div>
@@ -42,12 +58,12 @@ const MainCard = () => {
         <button className='
         bg-white text-black font-sans text-lg font-medium
         mt-10 px-4 py-2 rounded-xl hover:bg-transparent hover:text-white
-         hover:border hover:border-white hover:border-solid  
+         
         '
         onClick={(e)=>{handleBtnClick(e.target.innerText)}}
         >
           
-          upload image
+          {btnState}
         </button>
       </main>
     </>

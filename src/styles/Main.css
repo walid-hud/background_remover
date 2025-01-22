@@ -69,3 +69,10 @@
     background-color: #f0f8ff9a;
 }
 
+button{
+    transition: all 0.8s ease-in-out;
+}
+button:hover{
+    outline: 1px solid white;
+    transition: all 0.3s ease-in-out;
+}
