@@ -23,6 +23,9 @@ const MainCard = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    setIMGFile(undefined)
+    setBtnState('upload an image')
+
   }
 
   async function readImageFromStream(stream) {
@@ -53,13 +56,14 @@ const MainCard = () => {
 
     try {
       const response = await fetch("http://localhost:8080", requestOptions);
-      console.log(response)
       readImageFromStream(response.body)
 
     } catch (error) {
       console.error(error);
-    };
-
+    }
+    finally{
+      setBtnState('Download')
+    }
   }
 
 
@@ -73,7 +77,7 @@ const MainCard = () => {
     }
     if(btnState === 'remove background'){
       getEditedImg()
-      setBtnState('Download')
+      setBtnState('removing background...')
     }
     if(btnState === 'Download'){
       triggerDownload()
@@ -88,7 +92,7 @@ const MainCard = () => {
       '>
         <div className='
         w-fit min-h-[250px] min-w-[300px] max-w-[500px] max-h-[300px]  -mt-[10%] flex flex-col items-center
-        justify-center outline-dashed outline-[rgb(113,73,255)]
+        justify-center outline-dashed outline-[rgb(253,253,255)]
         outline-[2px] outline-offset-[-2px] rounded-xl overflow-clip
          hover:bg-[#000]
         '
