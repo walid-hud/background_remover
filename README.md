@@ -1,1 +1,1 @@
-Simple background remover using React and Shadcn UI (it's overkill I know 😐) and the backend is made with Flask.
+Simple background remover using React and the backend is made with Flask.
